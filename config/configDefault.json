@@ -1,0 +1,9 @@
+{
+  "projectName": {
+    "dbConfig": {
+      "host": "host",
+      "port": "port",
+      "dbName": "dbName"
+    }
+  }
+}
