@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
-//const mongoose = new mongooseHandler();
+var mongoose = new _mongooseHandler2.default();
 
 app.set('view engine', 'twig');
 app.set('views', _path2.default.join(__dirname, '../src/views/'));
