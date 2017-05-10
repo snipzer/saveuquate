@@ -1,54 +1,10 @@
-import Config from "config";
-import Mongoose from "mongoose";
-import kittenModel from "./kittenModel";
-import Event from "events";
+import mongoose from "mongoose";
 
-class kittenHandler extends Mongoose
+export default class kittenHandler
 {
-    constructor(methodName)
+    constructor()
     {
-        super();
-        this.dbConfig = Config.get('Config.dbConfig');
-        this.KittenModel = kittenModel;
-
-        this.init(methodName);
-    }
-
-    init(methodName)
-    {
-        this.connect(`mongodb://${ this.dbConfig.host }:${ this.dbConfig.port }/${ this.dbConfig.dbName }`, err =>
-        {
-            if(err)
-                console.log(err);
-            else
-                console.log("Mongoose connected")
-
-            return this.getMethod(methodName)();
-        });
-    }
-
-    getMethod(methodName)
-    {
-        switch (methodName)
-        {
-            case "getKittens":
-                return this.getKittens;
-                break;
-            case "getKitten":
-                return this.getKitten;
-                break;
-            case "postKitten":
-                return this.postKitten;
-                break;
-            case "putKitten":
-                return this.putKitten;
-                break;
-            case "killKitten":
-                return this.killKitten;
-                break;
-            default:
-                return undefined;
-        }
+        this.KittenModel = mongoose.model.getCollectionName("Kittens");
     }
 
     getKittens()
@@ -67,4 +23,3 @@ class kittenHandler extends Mongoose
     killKitten() {}
 
 }
-export default kittenHandler;

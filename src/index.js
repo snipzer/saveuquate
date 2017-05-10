@@ -1,11 +1,18 @@
 import Express from "express";
-const kittenHandler = require('./models/kittenHandler');
-
+import path from "path";
+import mongooseHandler from "./models/mongooseHandler";
 
 const app = Express();
 
-const kittens = kittenHandler("getKittens");
+//const mongoose = new mongooseHandler();
 
-console.log(kittens);
+app.set('view engine', 'twig');
+app.set('views', path.join(__dirname, '../src/views/'));
+console.log(path.join(__dirname, '../src/views/'));
+
+app.get('/', (req, res) => {
+    res.render('kitten.twig');
+});
+
 app.listen(3000, () => console.log("connected on port 3000"));
 
