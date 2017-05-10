@@ -1,6 +1,5 @@
 const yaml_config = require('node-yaml-config');
 import Mongoose from "mongoose";
-import path from "path";
 
 export default class mongooseHandler
 {

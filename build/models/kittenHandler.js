@@ -24,7 +24,7 @@ var kittenHandler = function () {
     _createClass(kittenHandler, [{
         key: "getKittens",
         value: function getKittens() {
-            this.KittenModel.find({}).then(function (kittens) {
+            return this.KittenModel.find({}).then(function (kittens) {
                 return console.log(kittens);
             }).catch(function (err) {
                 return console.log(err);
@@ -32,16 +32,65 @@ var kittenHandler = function () {
         }
     }, {
         key: "getKitten",
-        value: function getKitten() {}
+        value: function getKitten(name) {
+            return this.KittenModel.findOne({ "name": name }).then(function (result) {
+                return console.log(result);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        }
     }, {
         key: "postKitten",
-        value: function postKitten() {}
+        value: function postKitten(name, color, primaryQuality, primaryDefault, kibbles) {
+            var secondQuality = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+
+            return this.KittenModel.create({
+                name: name,
+                color: color,
+                primaryQuality: primaryQuality,
+                secondQuality: secondQuality,
+                primaryDefault: primaryDefault,
+                kibbles: kibbles,
+                isAvailable: true
+
+            }).then(function (result) {
+                return console.log(result);
+            }).catch(function (err) {
+                return console.log(err);
+            });
+        }
     }, {
         key: "putKitten",
-        value: function putKitten() {}
+        value: function putKitten(id) {
+            var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+            var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+            var primaryQuality = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+            var primaryDefault = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+            var kibbles = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+            var secondQuality = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+
+            return this.KittenModel.update({
+                "id": ObjectId(id)
+            }, {
+                $set: {
+                    "name": name,
+                    "color": color,
+                    "primaryQuality": primaryQuality,
+                    "primaryDefault": primaryDefault,
+                    "kibbles": kibbles,
+                    "secondQuality": secondQuality
+                }
+            });
+        }
     }, {
         key: "killKitten",
-        value: function killKitten() {}
+        value: function killKitten(id) {
+            return this.KittenModel.remove({ 'id': ObjectId(id) }).then(function (result) {
+                return console.log(result);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        }
     }]);
 
     return kittenHandler;
