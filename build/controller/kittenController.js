@@ -14,6 +14,10 @@ var _underscore = require("underscore");
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
+var _kittenIntegrityValidator = require("../models/kittenIntegrityValidator");
+
+var _kittenIntegrityValidator2 = _interopRequireDefault(_kittenIntegrityValidator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23,6 +27,8 @@ var KittenController = function () {
         _classCallCheck(this, KittenController);
 
         this.KittenHandler = new _kittenHandler2.default();
+        this.kIV = new _kittenIntegrityValidator2.default();
+        this.status = this.kIV.getStatus();
     }
 
     _createClass(KittenController, [{
@@ -88,11 +94,17 @@ var KittenController = function () {
     }, {
         key: "killKitten",
         value: function killKitten(req, res) {
-            this.KittenHandler.killKitten(req.body.id).then(function (result) {
-                res.json(result);
-            }).catch(function (e) {
-                return console.log(e);
-            });
+            var _this = this;
+
+            if (!this.kIV.checkId(req.body.id)) {
+                this.KittenHandler.killKitten(req.body.id).then(function (result) {
+                    res.status(_this.status.ok).json(result);
+                }).catch(function (e) {
+                    return console.log(e);
+                });
+            } else {
+                res.status(this.status.internalServerError).json({ message: "Oopps something gone wrong" });
+            }
         }
     }]);
 

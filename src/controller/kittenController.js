@@ -1,11 +1,14 @@
 import KittenHandler from "../models/kittenHandler";
 import _ from "underscore";
+import kIV from "../models/kittenIntegrityValidator";
 
 export default class KittenController {
 
     constructor()
     {
         this.KittenHandler = new KittenHandler();
+        this.kIV = new kIV();
+        this.status = this.kIV.getStatus();
     }
 
     index(req, res) {
@@ -67,10 +70,17 @@ export default class KittenController {
 
     killKitten(req, res)
     {
-        this.KittenHandler.killKitten(req.body.id).then(result =>
+        if(!this.kIV.checkId(req.body.id))
         {
-            res.json(result);
-        }).catch(e => console.log(e));
+            this.KittenHandler.killKitten(req.body.id).then(result =>
+            {
+                res.status(this.status.ok).json(result);
+            }).catch(e => console.log(e));
+        }
+        else
+        {
+            res.status(this.status.internalServerError).json({message: "Oopps something gone wrong"});
+        }
     }
 
 }
