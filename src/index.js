@@ -8,7 +8,7 @@ const app = Express();
 
 app.set('view engine', 'twig');
 app.set('views', path.join(__dirname, '../src/views/'));
-console.log(path.join(__dirname, '../src/views/'));
+
 
 app.get('/', (req, res) => {
     res.render('kitten.twig');
