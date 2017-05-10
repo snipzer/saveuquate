@@ -1,0 +1,6 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    Hello les amis !
+    <a href="{{ path('homepage') }}">Accueil</a> - <a href="{{ path('desk_show', {"deskId": 5}) }}">Bureau n°5</a>
+{% endblock %}

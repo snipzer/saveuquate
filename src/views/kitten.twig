@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}Adopt a beautiful cat{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+{% block body %}Salut le collectif "Un chat suffit" !
+    <a href="{{ path('homepage') }}">Accueil</a> - <a href="{{ path('desk_show', {"deskId": 5}) }}">Bureau n°5</a>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>
