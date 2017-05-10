@@ -6,9 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _mongoose = require("mongoose");
+var _kittenModel = require("./kittenModel");
 
-var _mongoose2 = _interopRequireDefault(_mongoose);
+var _kittenModel2 = _interopRequireDefault(_kittenModel);
+
+var _underscore = require("underscore");
+
+var _underscore2 = _interopRequireDefault(_underscore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,77 +22,96 @@ var kittenHandler = function () {
     function kittenHandler() {
         _classCallCheck(this, kittenHandler);
 
-        this.KittenModel = _mongoose2.default.model.getCollectionName("Kittens");
+        this.KittenModel = _kittenModel2.default;
     }
 
     _createClass(kittenHandler, [{
         key: "getKittens",
         value: function getKittens() {
-            return this.KittenModel.find({}).then(function (kittens) {
-                return console.log(kittens);
-            }).catch(function (err) {
-                return console.log(err);
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                _this.KittenModel.find({}).then(function (kittens) {
+                    return resolve(kittens);
+                }).catch(function (err) {
+                    return reject(err);
+                });
             });
         }
     }, {
         key: "getKitten",
-        value: function getKitten(name) {
-            return this.KittenModel.findOne({ "name": name }).then(function (result) {
-                return console.log(result);
-            }).catch(function (e) {
-                return console.log(e);
+        value: function getKitten(id) {
+            var _this2 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this2.KittenModel.findOne({ "_id": id }).then(function (result) {
+                    return resolve(result);
+                }).catch(function (e) {
+                    return reject(e);
+                });
             });
         }
     }, {
         key: "postKitten",
         value: function postKitten(name, color, primaryQuality, primaryDefault, kibbles) {
+            var _this3 = this;
+
             var secondQuality = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
 
-            return this.KittenModel.create({
-                name: name,
-                color: color,
-                primaryQuality: primaryQuality,
-                secondQuality: secondQuality,
-                primaryDefault: primaryDefault,
-                kibbles: kibbles,
-                isAvailable: true
+            return new Promise(function (resolve, reject) {
+                _this3.KittenModel.create({
+                    name: name,
+                    color: color,
+                    primaryQuality: primaryQuality,
+                    secondQuality: secondQuality,
+                    primaryDefault: primaryDefault,
+                    kibbles: kibbles,
+                    isAvailable: true
 
-            }).then(function (result) {
-                return console.log(result);
-            }).catch(function (err) {
-                return console.log(err);
+                }).then(function (result) {
+                    return resolve(result);
+                }).catch(function (err) {
+                    return reject(err);
+                });
             });
         }
     }, {
         key: "putKitten",
-        value: function putKitten(id) {
-            var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-            var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-            var primaryQuality = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-            var primaryDefault = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-            var kibbles = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-            var secondQuality = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+        value: function putKitten(id, array) {
+            var _this4 = this;
 
-            return this.KittenModel.update({
-                "id": ObjectId(id)
-            }, {
-                $set: {
-                    "name": name,
-                    "color": color,
-                    "primaryQuality": primaryQuality,
-                    "primaryDefault": primaryDefault,
-                    "kibbles": kibbles,
-                    "secondQuality": secondQuality
-                }
+            return new Promise(function (resolve, reject) {
+                _this4.getKitten(id).then(function (kitten) {
+                    if (!_underscore2.default.isNull(array.name)) kitten.name = array.name;
+
+                    if (!_underscore2.default.isNull(array.color)) kitten.color = array.color;
+
+                    if (!_underscore2.default.isNull(array.primaryQuality)) kitten.primaryQuality = array.primaryQuality;
+
+                    if (!_underscore2.default.isNull(array.primaryDefault)) kitten.primaryDefault = array.primaryDefault;
+
+                    if (!_underscore2.default.isNull(array.kibbles)) kitten.kibbles = array.kibbles;
+
+                    if (!_underscore2.default.isNull(array.secondQuality)) kitten.secondQuality = array.secondQuality;
+
+                    kitten.save();
+                    resolve(kitten);
+                }).catch(function (e) {
+                    return reject(e);
+                });
             });
         }
     }, {
         key: "killKitten",
         value: function killKitten(id) {
-            return this.KittenModel.remove({ 'id': ObjectId(id) }).then(function (result) {
-                return console.log(result);
-            }).catch(function (e) {
-                return console.log(e);
+            var _this5 = this;
+
+            return new Promise(function (resolve, reject) {
+                _this5.KittenModel.remove({ '_id': id }).then(function (result) {
+                    return resolve(result);
+                }).catch(function (e) {
+                    return reject(e);
+                });
             });
         }
     }]);

@@ -1,61 +1,89 @@
-import mongoose from "mongoose";
+import kittenModel from "./kittenModel";
+import _ from "underscore";
+
 
 export default class kittenHandler {
     constructor()
     {
-        this.KittenModel = mongoose.model.getCollectionName("Kittens");
+        this.KittenModel = kittenModel;
     }
 
     getKittens()
     {
-        return this.KittenModel.find({})
-            .then(kittens => console.log(kittens))
-            .catch(err => console.log(err));
+        return new Promise((resolve, reject) =>
+        {
+            this.KittenModel.find({})
+                .then(kittens => resolve(kittens))
+                .catch(err => reject(err));
+        });
     }
 
-    getKitten(name)
+    getKitten(id)
     {
-        return this.KittenModel.findOne({"name": name}).then(result => console.log(result)).catch(e => console.log(e));
+        return new Promise((resolve, reject) =>
+        {
+            this.KittenModel.findOne({"_id": id})
+                .then(result => resolve(result))
+                .catch(e => reject(e));
+        })
     }
 
     postKitten(name, color, primaryQuality, primaryDefault, kibbles, secondQuality = null)
     {
-        return this.KittenModel.create(
+        return new Promise((resolve, reject) =>
         {
-            name: name,
-            color: color,
-            primaryQuality: primaryQuality,
-            secondQuality: secondQuality,
-            primaryDefault: primaryDefault,
-            kibbles: kibbles,
-            isAvailable: true
+            this.KittenModel.create(
+                {
+                    name: name,
+                    color: color,
+                    primaryQuality: primaryQuality,
+                    secondQuality: secondQuality,
+                    primaryDefault: primaryDefault,
+                    kibbles: kibbles,
+                    isAvailable: true
 
-        }).then(result => console.log(result))
-            .catch(err => console.log(err))
+                }).then(result => resolve(result))
+                .catch(err => reject(err))
+        })
     }
 
-    putKitten(id, name = null, color = null, primaryQuality = null, primaryDefault = null, kibbles = null, secondQuality = null)
+    putKitten(id, array)
     {
-        return this.KittenModel.update(
+        return new Promise((resolve, reject) =>
+        {
+            this.getKitten(id).then(kitten =>
             {
-                "id" : ObjectId(id)
-            },
-            {
-                $set:
-                {
-                    "name": name,
-                    "color": color,
-                    "primaryQuality": primaryQuality,
-                    "primaryDefault": primaryDefault,
-                    "kibbles": kibbles,
-                    "secondQuality": secondQuality
-                }
-            })
+                if(!_.isNull(array.name))
+                    kitten.name = array.name;
+
+                if(!_.isNull(array.color))
+                    kitten.color = array.color;
+
+                if(!_.isNull(array.primaryQuality))
+                    kitten.primaryQuality = array.primaryQuality;
+
+                if(!_.isNull(array.primaryDefault))
+                    kitten.primaryDefault = array.primaryDefault;
+
+                if(!_.isNull(array.kibbles))
+                    kitten.kibbles = array.kibbles;
+
+                if(!_.isNull(array.secondQuality))
+                    kitten.secondQuality = array.secondQuality;
+
+                kitten.save();
+                resolve(kitten);
+            }).catch(e => reject(e));
+        })
     }
 
     killKitten(id)
     {
-        return this.KittenModel.remove({'id': ObjectId(id)}).then(result => console.log(result)).catch(e => console.log(e));
+        return new Promise((resolve, reject) =>
+        {
+            this.KittenModel.remove({'_id': id}).then(result => resolve(result))
+                .catch(e => reject(e));
+        });
     }
 
 }

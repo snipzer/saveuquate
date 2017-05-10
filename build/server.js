@@ -18,6 +18,14 @@ var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _kittenController = require('./controller/kittenController');
+
+var _kittenController2 = _interopRequireDefault(_kittenController);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29,6 +37,9 @@ var Server = function () {
         this._app = (0, _express2.default)();
 
         this._app.use(_express2.default.static(_path2.default.join(__dirname, '/../public')));
+
+        this._app.use(_bodyParser2.default.json());
+        this._app.use(_bodyParser2.default.urlencoded({ extended: true }));
 
         this._app.set('view engine', 'twig');
         this._app.set('views', _path2.default.join(__dirname, '../src/views/'));
@@ -46,11 +57,19 @@ var Server = function () {
     }, {
         key: '_initControllers',
         value: function _initControllers() {
-            //const userCtrl = new UserCtrl();
+            var kittenController = new _kittenController2.default();
 
-            this._app.get('/', function (req, res) {
-                res.render('kitten');
-            });
+            this._app.get('/', kittenController.index.bind(kittenController));
+
+            this._app.get('/v1/kittens', kittenController.getKittens.bind(kittenController));
+
+            this._app.get('/v1/kittens/:id', kittenController.getKitten.bind(kittenController));
+
+            this._app.post('/v1/kittens', kittenController.postKitten.bind(kittenController));
+
+            this._app.put('/v1/kittens', kittenController.putKitten.bind(kittenController));
+
+            this._app.delete('/v1/kittens', kittenController.killKitten.bind(kittenController));
         }
     }, {
         key: 'run',
