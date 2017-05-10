@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/snipzer/saveuquate#readme",
   "dependencies": {
+    "config": "^1.26.1",
+    "events": "^1.1.1",
     "express": "^4.15.2",
     "mongoose": "^4.9.7",
     "twig": "^1.10.4"
