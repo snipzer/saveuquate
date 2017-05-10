@@ -13,12 +13,7 @@ export default class mongooseHandler
             if(err)
                 console.log(err);
             else
-            {
                 console.log("Mongoose connected");
-                this.isConnected = true;
-            }
         });
-
-
     }
 }
