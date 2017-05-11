@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" charset="utf-8">
+    <title>Adopter un chat</title>
+    <style type="text/css">
+        body
+        {
+            background-color: #FFA;
+        }
+
+        p
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+        #monForm
+        {
+            width: 60%;
+        }
+
+        #monForm p
+        {
+            margin: 2px 0;
+        }
+
+        /* fieldset , legend */
+        #monForm fieldset
+        {
+            margin-bottom: 10px;
+            border: #CCC 1px solid;
+        }
+
+        #monForm fieldset:hover
+        {
+            background-color: #FFF;
+        }
+
+        #monForm fieldset legend
+        {
+            padding: 0 10px;
+            border-left: #CCC 1px solid;
+            border-right: #CCC 1px solid;
+            font-size: 1.2em;
+            color: #999;
+        }
+
+        /* Label */
+        #monForm label
+        {
+            background-color: #FFCC66;
+            display: block;
+            width: 39%;
+            float: left;
+            padding-right: 1%;
+            text-align: right;
+            letter-spacing: 1px;
+        }
+
+        #monForm label:hover
+        {
+            font-weight: bold;
+        }
+
+        #monForm .form_label_nostyle
+        {
+            background: none;
+        }
+
+        /* Input */
+        #monForm input, #monForm select
+        {
+            margin-left: 1%;
+            width: 58%;
+            border: #CCC 1px solid;
+        }
+
+        #monForm input:hover, #monForm select:hover, #monForm input:focus, #monForm select:focus
+        {
+            border: #999 1px solid;
+            background-color: #DDEEFF;
+        }
+
+        #monForm .form_input_day_month
+        {
+            width: 3%;
+        }
+
+        #monForm .form_input_year
+        {
+            width: 6%;
+        }
+    </style>
+</head>
+<body>
+<center><h1>UN CHAT SUFFIT</h1></center>
+<h1>Adopter un chat</h1>
+<form id="monForm" action="#" method="post">
+    <fieldset>
+        <legend>Informations personnelles</legend>
+        <p>
+            <label for="form_firstname">Prénom : </label>
+            <input type="text" id="form_firstname" name="firstname" />
+        </p>
+        <p>
+            <label for="form_lastname">Nom : </label>
+            <input type="text" id="form_lastname" name="lastname" />
+        </p>
+        <p>
+            <label for="form_gender">Sexe : </label>
+            <input type="text" id="form_gender" name="gender" />
+        </p>
+        <p>
+            <label for="form_birthday">Date de naissance : </label>
+            <input type="text" id="form_birthday" class="form_input_day_month" name="day" /> /
+            <input type="text" class="form_input_day_month" name="month" /> /
+            <input type="text" class="form_input_year" name="year" />
+        </p>
+        <p>
+            <label for="form_address">Adresse : </label>
+            <input type="text" id="form_address" name="address" />
+        </p>
+        <p>
+            <label for="form_postal_code">Code postal : </label>
+            <input type="text" id="form_postal_code" name="postal_code" />
+        </p>
+        <p>
+            <label for="form_city">Ville : </label>
+            <input type="text" id="form_city" name="city" />
+        </p>
+        <p>
+            <label for="form_country">Pays : </label>
+            <select id="form_country" name="country">
+                <optgroup label="Amérique">
+                    <option value="ca">Canada</option>
+                    <option value="us">États-Unis</option>
+                </optgroup>
+                <optgroup label="Europe">
+                    <option value="be">Belgique</option>
+                    <option value="fr">France</option>
+                </optgroup>
+            </select>
+        </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Déjà un Compte</legend>
+        <p>
+            <label for="form_login">Identifiant : </label>
+            <input type="text" id="form_login" name="login" />
+        </p>
+        <p>
+            <label for="form_password">Mot de passe : </label>
+            <input type="password" id="form_password" name="password" />
+        </p>
+        <p>
+            <label for="form_password2">Confirmer le mot de passe : </label>
+            <input type="password" id="form_password2" name="password2" />
+        </p>
+        <p>
+            <label for="form_mail">Adresse email : </label>
+            <input type="text" id="form_mail" name="mail" />
+        </p>
+        <p>
+            <label for="form_question">Question secrète : </label>
+            <input type="text" id="form_question" name="question" />
+        </p>
+        <p>
+            <label for="form_response">Réponse : </label>
+            <input type="text" id="form_response" name="response" />
+        </p>
+    </fieldset>
+
+    <p>
+        <label class="form_label_nostyle">&nbsp;</label>
+        <input type="submit" name="submit" />
+        <input type="reset" name="del" />
+    </p>
+</form>
+
+<p><br /><br /></p>
+<p><a href="showNonAdopted">Voir chats non adoptés</a> | <a href="showAll">Voir tous les chats</a></p>
+</body>
+<script src="js/jquery-3.2.0.min.js"></script>
+<script src="js/ajax.js"></script>
+</html>

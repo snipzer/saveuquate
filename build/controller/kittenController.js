@@ -40,6 +40,16 @@ var KittenController = function () {
             });
         }
     }, {
+        key: "showAll",
+        value: function showAll(req, res) {
+            res.render('showAll');
+        }
+    }, {
+        key: "showNonAdopted",
+        value: function showNonAdopted(req, res) {
+            res.render('showNonAdopted');
+        }
+    }, {
         key: "getKittens",
         value: function getKittens(req, res) {
 

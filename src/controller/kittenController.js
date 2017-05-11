@@ -18,6 +18,16 @@ export default class KittenController {
         });
     }
 
+    showAll(req, res)
+    {
+        res.render('showAll');
+    }
+
+    showNonAdopted(req, res)
+    {
+        res.render('showNonAdopted');
+    }
+
     getKittens(req, res)
     {
 

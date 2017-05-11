@@ -38,6 +38,10 @@ export default class Server {
 
         this._app.get('/', kittenController.index.bind(kittenController));
 
+        this._app.get('/showAll', kittenController.showAll.bind(kittenController));
+
+        this._app.get('/showNonAdopted', kittenController.showNonAdopted.bind(kittenController));
+
         this._app.get('/v1/kittens', kittenController.getKittens.bind(kittenController));
 
         this._app.get('/v1/kittens/:id', kittenController.getKitten.bind(kittenController));
