@@ -1,5 +1,13 @@
-import Express from "express";
+import mongooseHandler from "./models/mongooseHandler";
+import Server from "./server";
 
-const app = Express();
+const server = new Server();
 
-app.listen(3000, "connected on port 3000");
+const mongoose = new mongooseHandler();
+
+server.setPort();
+
+server.run();
+
+
+
