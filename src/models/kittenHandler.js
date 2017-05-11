@@ -28,18 +28,18 @@ export default class kittenHandler {
         })
     }
 
-    postKitten(name, color, primaryQuality, primaryDefault, kibbles, secondQuality = null)
+    postKitten(array)
     {
         return new Promise((resolve, reject) =>
         {
             this.KittenModel.create(
                 {
-                    name: name,
-                    color: color,
-                    primaryQuality: primaryQuality,
-                    secondQuality: secondQuality,
-                    primaryDefault: primaryDefault,
-                    kibbles: kibbles,
+                    name: array.name,
+                    color: array.color,
+                    primaryQuality: array.primaryQuality,
+                    secondQuality: array.secondQuality,
+                    primaryDefault: array.primaryDefault,
+                    kibbles: array.kibbles,
                     isAvailable: true
 
                 }).then(result => resolve(result))

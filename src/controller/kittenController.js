@@ -42,11 +42,27 @@ export default class KittenController {
     {
         const param = req.body;
 
-        this.KittenHandler.postKitten(param.name, param.color, param.primaryQuality, param.primaryDefault, param.kibbles, param.secondQuality)
-            .then(result =>
-            {
-                res.json(result);
-            }).catch(e => console.log(e));
+        let array = {
+            name: param.name,
+            color: param.color,
+            primaryQuality: param.primaryQuality,
+            primaryDefault: param.primaryDefault,
+            kibbles: param.kibbles,
+            secondQuality: (!_.isEmpty(param.secondQuality)) ? param.secondQuality:null
+        };
+
+        if(this.kIV.checkArrayString(array))
+        {
+            this.KittenHandler.postKitten(array)
+                .then(result =>
+                {
+                    res.status(this.status.ok).json(result);
+                }).catch(e => console.log(e));
+        }
+        else
+        {
+            res.status(this.status.internalServerError).json({message: "Oopps something gone wrong"})
+        }
     }
 
     putKitten(req, res)
@@ -62,10 +78,16 @@ export default class KittenController {
             secondQuality: (!_.isEmpty(param.secondQuality)) ? param.secondQuality:null
         };
 
-
-        this.KittenHandler.putKitten(param.id, array)
-            .then((result) => res.json(result))
-            .catch(e => console.log(e));
+        if(this.kIV.checkArrayString(array))
+        {
+            this.KittenHandler.putKitten(param.id, array)
+                .then((result) => res.status(this.status.ok).json(result))
+                .catch(e => console.log(e));
+        }
+        else
+        {
+            res.status(this.status.internalServerError).json({message: "Oopps something gone wrong"})
+        }
     }
 
     killKitten(req, res)

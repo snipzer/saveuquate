@@ -1,9 +1,11 @@
 import validator from "validator";
+import _ from "underscore";
 
 export default class kittenIntegrityValidator
 {
     constructor()
     {
+        this._ = _;
         this.val = validator;
         this.status = {
             ok: 200,
@@ -32,16 +34,19 @@ export default class kittenIntegrityValidator
         return error;
     }
 
-    checkString(stringArray)
+    checkArrayString(stringArray)
     {
         let error = false;
 
-        stringArray.forEach(el =>
+        for(let t in stringArray)
         {
-            if(!this.val.isAlpha(el))
-                error = true;
-        });
+
+            if(!this._.isNull(stringArray[t]))
+                if(!this.val.isAlpha(stringArray[t]))
+                    error = true;
+        }
 
         return error;
     }
+
 }
