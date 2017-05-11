@@ -11,7 +11,7 @@ app.set('views', path.join(__dirname, '../src/views/'));
 
 
 app.get('/', (req, res) => {
-    res.render('kitten.twig');
+    res.render('base.twig');
 });
 
 app.listen(3000, () => console.log("connected on port 3000"));

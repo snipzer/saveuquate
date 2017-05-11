@@ -22,7 +22,7 @@ app.set('view engine', 'twig');
 app.set('views', _path2.default.join(__dirname, '../src/views/'));
 
 app.get('/', function (req, res) {
-    res.render('kitten.twig');
+    res.render('base.twig');
 });
 
 app.listen(3000, function () {
