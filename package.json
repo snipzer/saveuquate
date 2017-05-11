@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/snipzer/saveuquate#readme",
   "dependencies": {
+    "apidoc": "^0.17.5",
     "body-parser": "^1.17.1",
     "config": "^1.26.1",
     "events": "^1.1.1",
