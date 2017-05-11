@@ -1,4 +1,4 @@
-const Config = require('config');
+const yaml_config = require('node-yaml-config');
 import Mongoose from "mongoose";
 
 export default class mongooseHandler
@@ -6,17 +6,14 @@ export default class mongooseHandler
     constructor()
     {
         this.mongoose = Mongoose;
-        this.dbConfig = Config.dbConfig;
-        console.log(this.dbConfig);
-        this.mongoose.connect(`mongodb://${ this.dbConfig.host }:${ this.dbConfig.port }/${ this.dbConfig.dbName }`, err =>
+        this.config = yaml_config.load('config/config.yml');
+
+        this.mongoose.connect(`mongodb://${ this.config.dbConfig.host }:${ this.config.dbConfig.port }/${ this.config.dbConfig.dbName }`, err =>
         {
             if(err)
                 console.log(err);
             else
-            {
                 console.log("Mongoose connected");
-                this.isConnected = true;
-            }
         });
     }
 }

@@ -1,11 +1,3 @@
-/**
- * Created by snipzer on 09/05/17.
- */
-// create a kitten line for the table
-/**
- * Created by snipzer on 09/05/17.
- */
-// create a kitten line for the table
 function createLine(data) {
     var line = "<tr>";
     line += "<td>"+data['name']+"</td>";
@@ -28,8 +20,8 @@ function createLine(data) {
 
 // fetch all kittens
 function fetchKittens() {
-    $.ajax({
-        url: 'http://localhost:8080/mock/kittens.json',
+    $.ajax({//faire une requette ajax
+        url: 'http://localhost:8080/mock/kittens.json',//url d'appel
         type: 'GET',
         dataType: 'json',
         success: function(json, status) {
@@ -40,7 +32,7 @@ function fetchKittens() {
                 $("#kittens-table").append(createLine(data));
             })
         },
-        error: function(result, status, error) {
+        error: function(result, status, error) {//en cas d'erreur
         }
     });
 }
