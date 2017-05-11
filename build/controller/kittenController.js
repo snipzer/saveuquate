@@ -63,17 +63,34 @@ var KittenController = function () {
     }, {
         key: "postKitten",
         value: function postKitten(req, res) {
+            var _this = this;
+
             var param = req.body;
 
-            this.KittenHandler.postKitten(param.name, param.color, param.primaryQuality, param.primaryDefault, param.kibbles, param.secondQuality).then(function (result) {
-                res.json(result);
-            }).catch(function (e) {
-                return console.log(e);
-            });
+            var array = {
+                name: param.name,
+                color: param.color,
+                primaryQuality: param.primaryQuality,
+                primaryDefault: param.primaryDefault,
+                kibbles: param.kibbles,
+                secondQuality: !_underscore2.default.isEmpty(param.secondQuality) ? param.secondQuality : null
+            };
+
+            if (this.kIV.checkArrayString(array)) {
+                this.KittenHandler.postKitten(array).then(function (result) {
+                    res.status(_this.status.ok).json(result);
+                }).catch(function (e) {
+                    return console.log(e);
+                });
+            } else {
+                res.status(this.status.internalServerError).json({ message: "Oopps something gone wrong" });
+            }
         }
     }, {
         key: "putKitten",
         value: function putKitten(req, res) {
+            var _this2 = this;
+
             var param = req.body;
 
             var array = {
@@ -85,20 +102,24 @@ var KittenController = function () {
                 secondQuality: !_underscore2.default.isEmpty(param.secondQuality) ? param.secondQuality : null
             };
 
-            this.KittenHandler.putKitten(param.id, array).then(function (result) {
-                return res.json(result);
-            }).catch(function (e) {
-                return console.log(e);
-            });
+            if (this.kIV.checkArrayString(array)) {
+                this.KittenHandler.putKitten(param.id, array).then(function (result) {
+                    return res.status(_this2.status.ok).json(result);
+                }).catch(function (e) {
+                    return console.log(e);
+                });
+            } else {
+                res.status(this.status.internalServerError).json({ message: "Oopps something gone wrong" });
+            }
         }
     }, {
         key: "killKitten",
         value: function killKitten(req, res) {
-            var _this = this;
+            var _this3 = this;
 
             if (!this.kIV.checkId(req.body.id)) {
                 this.KittenHandler.killKitten(req.body.id).then(function (result) {
-                    res.status(_this.status.ok).json(result);
+                    res.status(_this3.status.ok).json(result);
                 }).catch(function (e) {
                     return console.log(e);
                 });

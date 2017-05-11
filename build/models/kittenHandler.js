@@ -53,19 +53,17 @@ var kittenHandler = function () {
         }
     }, {
         key: "postKitten",
-        value: function postKitten(name, color, primaryQuality, primaryDefault, kibbles) {
+        value: function postKitten(array) {
             var _this3 = this;
-
-            var secondQuality = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
 
             return new Promise(function (resolve, reject) {
                 _this3.KittenModel.create({
-                    name: name,
-                    color: color,
-                    primaryQuality: primaryQuality,
-                    secondQuality: secondQuality,
-                    primaryDefault: primaryDefault,
-                    kibbles: kibbles,
+                    name: array.name,
+                    color: array.color,
+                    primaryQuality: array.primaryQuality,
+                    secondQuality: array.secondQuality,
+                    primaryDefault: array.primaryDefault,
+                    kibbles: array.kibbles,
                     isAvailable: true
 
                 }).then(function (result) {

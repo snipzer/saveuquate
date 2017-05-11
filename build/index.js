@@ -1,9 +1,5 @@
 "use strict";
 
-var _express = require("express");
-
-var _express2 = _interopRequireDefault(_express);
-
 var _mongooseHandler = require("./models/mongooseHandler");
 
 var _mongooseHandler2 = _interopRequireDefault(_mongooseHandler);

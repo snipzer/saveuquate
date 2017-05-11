@@ -53,6 +53,6 @@ export default class Server {
     {
         this._initControllers();
 
-        this._app.listen(this.port, () => console.log(`Server listening on port ${this.port}!`))
+        this._app.listen(this.port, () => console.log(`Server listening on port ${this.port}!`));
     }
 }

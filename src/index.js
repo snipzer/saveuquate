@@ -1,4 +1,3 @@
-import Express from "express";
 import mongooseHandler from "./models/mongooseHandler";
 import Server from "./server";
 
