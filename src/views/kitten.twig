@@ -96,94 +96,48 @@
     </style>
 </head>
 <body>
-<center><h1>UN CHAT SUFFIT</h1></center>
+<img src="http://localhost:3000/image/header.gif" alt="">
+<h1>UN CHAT SUFFIT</h1>
 <h1>Adopter un chat</h1>
 <form id="monForm" action="#" method="post">
     <fieldset>
-        <legend>Informations personnelles</legend>
+        <legend>Créer un chaton à adopter</legend>
         <p>
-            <label for="form_firstname">Prénom : </label>
-            <input type="text" id="form_firstname" name="firstname" />
+            <label for="form_firstname">Nom : </label>
+            <input type="text" id="form_firstname" name="name" />
         </p>
         <p>
-            <label for="form_lastname">Nom : </label>
-            <input type="text" id="form_lastname" name="lastname" />
+            <label for="form_lastname">Couleur : </label>
+            <input type="text" id="form_lastname" name="color" />
         </p>
         <p>
-            <label for="form_gender">Sexe : </label>
-            <input type="text" id="form_gender" name="gender" />
+            <label for="form_gender">Qualité n°1 : </label>
+            <input type="text" id="form_gender" name="primaryQuality" />
         </p>
         <p>
-            <label for="form_birthday">Date de naissance : </label>
-            <input type="text" id="form_birthday" class="form_input_day_month" name="day" /> /
-            <input type="text" class="form_input_day_month" name="month" /> /
-            <input type="text" class="form_input_year" name="year" />
+            <label for="form_birthday">Qualité n°2 : </label>
+            <input type="text" id="form_birthday" name="secondQuality" />
         </p>
         <p>
-            <label for="form_address">Adresse : </label>
-            <input type="text" id="form_address" name="address" />
+            <label for="form_address">Défaut principal: </label>
+            <input type="text" id="form_address" name="primaryDefault" />
         </p>
         <p>
-            <label for="form_postal_code">Code postal : </label>
-            <input type="text" id="form_postal_code" name="postal_code" />
-        </p>
-        <p>
-            <label for="form_city">Ville : </label>
-            <input type="text" id="form_city" name="city" />
-        </p>
-        <p>
-            <label for="form_country">Pays : </label>
-            <select id="form_country" name="country">
-                <optgroup label="Amérique">
-                    <option value="ca">Canada</option>
-                    <option value="us">États-Unis</option>
-                </optgroup>
-                <optgroup label="Europe">
-                    <option value="be">Belgique</option>
-                    <option value="fr">France</option>
-                </optgroup>
-            </select>
-        </p>
-    </fieldset>
-
-    <fieldset>
-        <legend>Déjà un Compte</legend>
-        <p>
-            <label for="form_login">Identifiant : </label>
-            <input type="text" id="form_login" name="login" />
-        </p>
-        <p>
-            <label for="form_password">Mot de passe : </label>
-            <input type="password" id="form_password" name="password" />
-        </p>
-        <p>
-            <label for="form_password2">Confirmer le mot de passe : </label>
-            <input type="password" id="form_password2" name="password2" />
-        </p>
-        <p>
-            <label for="form_mail">Adresse email : </label>
-            <input type="text" id="form_mail" name="mail" />
-        </p>
-        <p>
-            <label for="form_question">Question secrète : </label>
-            <input type="text" id="form_question" name="question" />
-        </p>
-        <p>
-            <label for="form_response">Réponse : </label>
-            <input type="text" id="form_response" name="response" />
+            <label for="form_postal_code">Marque de croquettes préférée : </label>
+            <input type="text" id="form_postal_code" name="kibbles" />
         </p>
     </fieldset>
 
     <p>
         <label class="form_label_nostyle">&nbsp;</label>
         <input type="submit" name="submit" />
-        <input type="reset" name="del" />
     </p>
 </form>
+<br><br>
+<div id="kittenBox"></div>
 
-<p><br /><br /></p>
-<p><a href="showNonAdopted">Voir chats non adoptés</a> | <a href="showAll">Voir tous les chats</a></p>
+<a href="showNonAdopted">Voir chats non adoptés</a> | <a href="showAll">Voir tous les chats</a></p>
 </body>
-<script src="js/jquery-3.2.0.min.js"></script>
-<script src="js/ajax.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://localhost:3000/js/kitten.js"></script>
 </html>
